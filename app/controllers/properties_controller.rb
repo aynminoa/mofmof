@@ -8,15 +8,18 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1 or /properties/1.json
   def show
+    @nearest_stations = @property.nearest_stations
   end
 
   # GET /properties/new
   def new
     @property = Property.new
+    2.times { @property.nearest_stations.new }
   end
 
   # GET /properties/1/edit
   def edit
+    @property.nearest_stations.new
   end
 
   # POST /properties 
@@ -32,7 +35,7 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1 
   def update
       if @property.update(property_params)
-        redirect_to @property, notice: "物件情報が更新されました" 
+        redirect_to @property, notice: "物件情報を更新しました" 
       else
         render :edit, status: :unprocessable_entity 
       end
@@ -41,7 +44,7 @@ class PropertiesController < ApplicationController
   # DELETE /properties/1 
   def destroy
     @property.destroy
-      redirect_to properties_url, notice: "物件情報が削除されました" 
+      redirect_to properties_url, notice: "物件情報を削除しました" 
   end
 
   private
@@ -52,6 +55,7 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :rent, :address, :age, :remark)
+      params.require(:property).permit(:name, :rent, :address, :age, :remark, 
+                                      nearest_stations_attributes: [:line, :station, :on_foot, :id])
     end
 end
