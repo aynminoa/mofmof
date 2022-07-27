@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Line:</strong>
+  <%= @nearest_station.line %>
+</p>
+
+<p>
+  <strong>Station:</strong>
+  <%= @nearest_station.station %>
+</p>
+
+<p>
+  <strong>On foot:</strong>
+  <%= @nearest_station.on_foot %>
+</p>
+
+<p>
+  <strong>Property:</strong>
+  <%= @nearest_station.property_id %>
+</p>
+
+<%= link_to 'Edit', edit_nearest_station_path(@nearest_station) %> |
+<%= link_to 'Back', nearest_stations_path %>
